@@ -4,6 +4,16 @@
 dnf install -y nginx
 systemctl start nginx
 
+
+# copy nginx.conf to the nginx configuration directory
+
+# cp nginx.conf /etc/nginx/default.d/roboshop.conf
+
+# replace the default nginx.conf with the one provided in the repository to configure the reverse proxy for the frontend application
+
+cp nginx.conf /etc/nginx/nginx.conf
+
+
 #  Install Node.js for the frontend application and version 20.x is used as an example, you can change it to the version you need   
 curl -fsSL https://rpm.nodesource.com/setup_20.x | bash -
 dnf install -y nodejs
@@ -17,13 +27,6 @@ npm install
 npm run build
 rm -rf /usr/share/nginx/html/*
 cp -r out/* /usr/share/nginx/html/
-
-# copy nginx.conf to the nginx configuration directory
-
-# cp nginx.conf /etc/nginx/default.d/roboshop.conf
-
-# replace the default nginx.conf with the one provided in the repository to configure the reverse proxy for the frontend application
-cp nginx.conf /etc/nginx/nginx.conf
 
 nginx -t
 systemctl restart nginx
